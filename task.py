@@ -7,28 +7,24 @@ class Task:
         self.due_date = due_date
         self.description = description
 
-
-task1 = Task("Do laundry", "On wednesday")
-task2 = Task("Take out the garbage", "On Tuesday")
-task3 = Task("Go to the gym", "tonight")
-
-print(task1)
-print(task2)
-print(task3)
+    def __str__(self):
+        return "{} : {}".format(self.description, self.due_date)
 
 
 class TodoList:
+    my_list_of_tasks = []
 
     def __init__(self):
         self.task_list = []
 
-    def add_task(self, task):
-        self.task_list.append(task)
+    @classmethod
+    def add_task(cls, description, due_date):
+        tasks = Task(description, due_date)
+        cls.my_list_of_tasks.append(tasks)
 
 
-my_list = TodoList()
-my_list.add_task(task1)
-my_list.add_task(task2)
-my_list.add_task(task3)
+task1 = TodoList.add_task("Do laundry", "On wednesday")
+task2 = TodoList.add_task("Take out the garbage", "On Tuesday")
+task3 = TodoList.add_task("Go to the gym", "tonight")
 
-print(my_list)
+print(TodoList.my_list_of_tasks)
